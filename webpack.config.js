@@ -1,9 +1,13 @@
 const path = require('node:path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+
+const nodeEnv = process.env.NODE_ENV ?? 'development'
 
 module.exports = {
-  mode: process.env.NODE_ENV ?? 'development',
+  mode: nodeEnv,
   entry: './src/scripts/index.js',
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -38,6 +42,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/main.css',
       chunkFilename: 'css/main.css',
+    }),
+    new CopyPlugin({
+      patterns: [{ from: 'src/images', to: 'images' }],
+    }),
+    new WriteFilePlugin({
+      test: /^(?!.*(hot)).*/,
     }),
   ],
 }
