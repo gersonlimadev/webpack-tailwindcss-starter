@@ -31,7 +31,16 @@ module.exports = {
       {
         test: /\.css$/i,
         include: path.resolve(__dirname, 'src'),
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
+        ],
       },
     ],
   },
