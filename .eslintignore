@@ -1,0 +1,4 @@
+webpack.config.js
+public/*.html
+*.js
+!src/**/*.js
