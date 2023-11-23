@@ -1,0 +1,17 @@
+@tailwind components;
+
+button,
+a {
+  @apply transition-all duration-300 text-current;
+}
+
+strong,
+b {
+  @apply font-bold;
+}
+
+@layer components {
+  .heading-sm {
+    @apply text-3xl font-normal;
+  }
+}

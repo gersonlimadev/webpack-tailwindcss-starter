@@ -3,7 +3,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   mode: 'jit',
-  content: ['./public/*.html'],
+  content: ['./src/**/*.njk', './public/*.html'],
   theme: {
     colors: {
       current: 'currentColor',
@@ -54,7 +54,9 @@ module.exports = {
       }),
     },
   },
+  safelist: [{ pattern: /(bg|text|border)-./ }],
   plugins: [
+    require('@tailwindcss/typography'),
     plugin(function ({ addVariant }) {
       addVariant('group-active', () => {
         return `:merge(.group).active &`

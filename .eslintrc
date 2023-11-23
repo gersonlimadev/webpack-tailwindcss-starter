@@ -8,11 +8,12 @@
   ],
   "plugins": ["simple-import-sort"],
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 8,
     "sourceType": "module"
   },
   "env": {
-    "es6": true
+    "es6": true,
+    "browser": true
   },
   "rules": {
     "no-console": "warn",

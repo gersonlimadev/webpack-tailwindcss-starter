@@ -1,6 +1,7 @@
 const path = require('node:path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
@@ -8,7 +9,7 @@ const nodeEnv = process.env.NODE_ENV ?? 'development'
 
 module.exports = {
   mode: nodeEnv,
-  entry: './src/scripts/index.js',
+  entry: './src/scripts/main.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
@@ -42,12 +43,24 @@ module.exports = {
           'postcss-loader',
         ],
       },
+      {
+        test: /\.njk$/,
+        use: [
+          {
+            loader: 'simple-nunjucks-loader',
+            options: {},
+          },
+        ],
+      },
     ],
   },
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
   },
   plugins: [
+    new HTMLWebpackPlugin({
+      template: 'src/index.njk',
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/main.css',
       chunkFilename: 'css/main.css',

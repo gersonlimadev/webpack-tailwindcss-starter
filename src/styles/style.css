@@ -1,7 +1,16 @@
+@import './fonts.css';
+@import './typography.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply text-black antialiased;
+  @apply text-black antialiased scroll-smooth;
+}
+
+@layer components {
+  .container {
+    @apply px-6 w-full !max-w-full md:px-8;
+  }
 }
